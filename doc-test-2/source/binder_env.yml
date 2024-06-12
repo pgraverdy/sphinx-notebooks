@@ -1,0 +1,10 @@
+name: test-environment-1
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - psutil
+  - toolz
+  - matplotlib
+  - pandas
