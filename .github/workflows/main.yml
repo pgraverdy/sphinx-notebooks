@@ -28,11 +28,11 @@ jobs:
           make html
       - name: Sphinx build 2
         run: |
-          cd ../doc-test-2
+          cd doc-test-2
           make html
       - name: Sphinx build 3
         run: |
-          cd ../doc-test-3
+          cd doc-test-3
           make html
       - name: Sphinx build 4
         run: |
@@ -40,7 +40,6 @@ jobs:
           jupyter-book build .
       - name: copy docs
         run: |
-          cd ..
           mkdir build
           cp -R doc-test-1/build/html doc1
           cp -R doc-test-2/build/html doc2
