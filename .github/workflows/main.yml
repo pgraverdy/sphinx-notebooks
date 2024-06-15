@@ -40,7 +40,7 @@ jobs:
           jupyter-book build .
       - name: copy docs
         run: |
-          mkdir build
+          mkdir docs
           cp -R doc-test-1/build/html doc1
           cp -R doc-test-2/build/html doc2
           cp -R doc-test-3/build/html doc3
