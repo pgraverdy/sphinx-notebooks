@@ -41,10 +41,13 @@ jobs:
       - name: copy docs
         run: |
           mkdir docs
-          cp -R doc-test-1/build/html/* docs/doc1
-          cp -R doc-test-2/build/html/ docs/doc2
-          cp -R doc-test-2/build/html/ docs/
-          cp -R doc-test-3/build/html/ docs/doc3
+          mkdir docs/doc2
+          mkdir docs/doc3
+          mkdir docs/doc4
+          mv doc-test-1/build/html docs/doc1
+          cp -R doc-test-2/build/html/* docs/doc2
+          cp -R doc-test-2/build/html/* docs/
+          cp -R doc-test-3/build/html/* docs/doc3
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
