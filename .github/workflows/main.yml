@@ -22,15 +22,34 @@ jobs:
           pip install sphinx_thebe myst_nb ipywidgets
           pip install sphinx_book_theme
           pip install jupyter-book matplotlib numpy
-      - name: Sphinx build
+      - name: Sphinx build 1
         run: |
           cd doc-test-1
           make html
+      - name: Sphinx build 2
+        run: |
+          cd ../doc-test-2
+          make html
+      - name: Sphinx build 3
+        run: |
+          cd ../doc-test-3
+          make html
+      - name: Sphinx build 4
+        run: |
+          cd doc-test-4/newbook
+          jupyter-book build .
+      - name: copy docs
+        run: |
+          cd ..
+          mkdir build
+          cp -R doc-test-1/build/html doc1
+          cp -R doc-test-2/build/html doc2
+          cp -R doc-test-3/build/html doc3
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: doc-test-1/build/html/
+          publish_dir: docs
           force_orphan: true        
