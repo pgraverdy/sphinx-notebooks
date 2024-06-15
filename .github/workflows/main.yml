@@ -1,0 +1,36 @@
+name: documentation
+
+on: 
+  # Allow for running this manually.
+  workflow_dispatch: 
+  # push: 
+  # pull_request:
+  
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y python3 pandoc python3-pip
+          pip install sphinx sphinx_rtd_theme myst_parser nbsphinx
+          pip install sphinx_thebe myst_nb ipywidgets
+          pip install sphinx_book_theme
+          pip install jupyter-book matplotlib numpy
+      - name: Sphinx build
+        run: |
+          cd doc-test-1
+          make html
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        with:
+          publish_branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: doc-test-1/build/html
+          force_orphan: true
